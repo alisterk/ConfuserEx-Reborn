@@ -27,6 +27,8 @@
                                     IsEnabled="{Binding HasPacker}" HorizontalAlignment="Left"
                                     VerticalAlignment="Center"
                                     SelectedComponent="{Binding App.Project.Packer.Id, Converter={StaticResource PackerConverter}, Mode=TwoWay}" />
+                <CheckBox Content="FindExactMatch " VerticalAlignment="Center" HorizontalAlignment="Right"
+                          Margin="50,0,0,0" IsChecked="{Binding FindExactMatch}" />
             </StackPanel>
 
             <Label Grid.Row="1" Grid.Column="0" Content="Modules : " VerticalAlignment="Bottom"

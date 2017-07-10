@@ -27,7 +27,12 @@ namespace Confuser.Core {
 		/// </summary>
 		public static readonly string Version;
 
-		static readonly string Copyright;
+	    /// <summary>
+	    /// 
+	    /// </summary>
+	    public static bool FindExactMatch { get; set; }
+
+        static readonly string Copyright;
 
 		static ConfuserEngine() {
 			Assembly assembly = typeof(ConfuserEngine).Assembly;
@@ -86,7 +91,7 @@ namespace Confuser.Core {
 			bool ok = false;
 			try {
 				var asmResolver = new AssemblyResolver();
-				asmResolver.FindExactMatch = true;
+				asmResolver.FindExactMatch = FindExactMatch;
 				asmResolver.EnableTypeDefCache = true;
 				asmResolver.DefaultModuleContext = new ModuleContext(asmResolver);
 				context.Resolver = asmResolver;

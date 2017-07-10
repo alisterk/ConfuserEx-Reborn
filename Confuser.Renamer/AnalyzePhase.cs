@@ -193,7 +193,10 @@ namespace Confuser.Renamer {
 			else if (method.IsRuntimeSpecialName)
 				service.SetCanRename(method, false);
 
-			else if (parameters.GetParameter(context, method, "forceRen", false))
+			else if (method.IsExplicitlyImplementedInterfaceMember())
+			    service.SetCanRename(method, false);
+
+            else if (parameters.GetParameter(context, method, "forceRen", false))
 				return;
 
 			else if (method.DeclaringType.IsComImport() && !method.HasAttribute("System.Runtime.InteropServices.DispIdAttribute"))
@@ -269,6 +272,9 @@ namespace Confuser.Renamer {
             else if (property.DeclaringType.IsSerializable) // && !field.IsNotSerialized)
                 service.SetCanRename(property, false);
 
+			else if (property.IsExplicitlyImplementedInterfaceMember())
+			    service.SetCanRename(property, false);
+
             else if (property.DeclaringType.IsSerializable && (property.CustomAttributes.IsDefined("XmlIgnore")
                                                         || property.CustomAttributes.IsDefined("XmlIgnoreAttribute")
                                                         || property.CustomAttributes.IsDefined("System.Xml.Serialization.XmlIgnore")
@@ -293,6 +299,9 @@ namespace Confuser.Renamer {
 
 			else if (evt.IsRuntimeSpecialName)
 				service.SetCanRename(evt, false);
-		}
+
+			else if (evt.IsExplicitlyImplementedInterfaceMember())
+			    service.SetCanRename(evt, false);
+        }
 	}
 }

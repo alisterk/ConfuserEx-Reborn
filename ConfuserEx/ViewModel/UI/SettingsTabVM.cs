@@ -29,7 +29,21 @@ namespace ConfuserEx.ViewModel {
 			set { SetProperty(ref hasPacker, value, "HasPacker"); }
 		}
 
-		public IList ModulesView { get; private set; }
+
+	    private bool findExactMatch;
+	    public bool FindExactMatch
+	    {
+            get { return findExactMatch; }
+	        set
+	        {
+	            SetProperty(ref findExactMatch, value, "FindExactMatch");
+	            ConfuserEngine.FindExactMatch = value;
+
+	        }
+	    }
+
+
+        public IList ModulesView { get; private set; }
 
 		public IRuleContainer SelectedList {
 			get { return selectedList; }
@@ -99,7 +113,9 @@ namespace ConfuserEx.ViewModel {
 				else if (!hasPacker)
 					App.Project.Packer = null;
 			}
-			base.OnPropertyChanged(property);
+
+		     
+                base.OnPropertyChanged(property);
 		}
 	}
 }
